@@ -1,0 +1,219 @@
+@import "tailwindcss";
+
+/* Performance optimizations */
+* {
+  @apply box-border;
+}
+
+html {
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+  overflow-y: scroll;
+}
+
+body {
+  @apply text-white overflow-x-hidden;
+  background: #000000;
+  font-feature-settings: "rounding" 1;
+}
+
+/* Prevent FOUC */
+@supports (font-variation-settings: normal) {
+  body {
+    font-variation-settings: normal;
+  }
+}
+
+/* Accessibility - High contrast mode support */
+@media (prefers-contrast: more) {
+  body {
+    @apply text-white;
+    background: #000000;
+  }
+}
+
+/* Motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    @apply !transition-none !animate-none;
+  }
+
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+/* Selection styling for accessibility */
+::selection {
+  background: rgba(59, 130, 246, 0.3);
+  color: white;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 0.5rem;
+  height: 0.5rem;
+}
+
+::-webkit-scrollbar-track {
+  background: #000000;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* Focus visible for keyboard navigation */
+:focus-visible {
+  outline: 2px solid #60a5fa;
+  outline-offset: 2px;
+}
+
+/* Glassmorphism base */
+.glassmorphism {
+  backdrop-filter: blur(1.5rem);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.glassmorphism-hover {
+  transition: all 300ms;
+}
+
+.glassmorphism-hover:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Gradient text utility */
+.gradient-text {
+  background: linear-gradient(to right, #60a5fa, #a78bfa, #ec4899);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+/* Performance: will-change for animated elements */
+.will-animate {
+  will-change: opacity, transform;
+}
+
+/* Disable animations on low-power devices */
+@media (prefers-reduced-motion: reduce) {
+  .will-animate {
+    will-change: auto;
+  }
+}
+
+/* Ensure images don't cause layout shift */
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+/* Form styling with accessibility */
+input,
+textarea,
+select {
+  font-size: 1rem;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  outline: 2px solid #60a5fa;
+  outline-offset: 2px;
+}
+
+/* Mobile-first fluid typography */
+h1 {
+  font-size: clamp(1.875rem, 5vw, 3.75rem);
+}
+
+h2 {
+  font-size: clamp(1.5rem, 4vw, 3rem);
+}
+
+h3 {
+  font-size: clamp(1.25rem, 3vw, 2rem);
+}
+
+body {
+  font-size: clamp(0.875rem, 1vw, 1rem);
+}
+
+/* High contrast for links */
+a {
+  transition: color 200ms;
+}
+
+a:hover {
+  color: #60a5fa;
+}
+
+@media (prefers-contrast: more) {
+  a {
+    text-decoration: underline;
+  }
+}
+
+/* Grain overlay pattern */
+.grain {
+  position: relative;
+}
+
+.grain::after {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' seed='1' /%3E%3C/filter%3E%3Crect width='400' height='400' fill='%23000' /%3E%3Crect width='400' height='400' fill='%23fff' filter='url(%23noiseFilter)' opacity='0.03' /%3E%3C/svg%3E");
+  background-size: 400px 400px;
+  opacity: 0.3;
+  z-index: -1;
+}
+
+/* Smooth performance optimizations */
+body {
+  transform: translateZ(0);
+}
+
+/* Focus trap for modals */
+.focus-trap {
+  outline: 2px solid transparent;
+}
+
+.focus-trap:focus-within {
+  outline: 2px solid #60a5fa;
+  outline-offset: 2px;
+}
+
+/* Prevent text selection on interactive elements */
+button,
+[role="button"] {
+  user-select: none;
+}
+
+/* Improved button states */
+button,
+a[role="button"] {
+  transition: color 200ms;
+}
+
+button:active {
+  scale: 0.95;
+}
+
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
